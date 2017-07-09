@@ -48,7 +48,12 @@ namespace Learning_Csharp
             MethodWithCallback(1, 2, lambdaDelegate);
             MethodWithCallback(1, 2, Console.WriteLine);
             // lambda
-            MethodWithCallback(1, 2, s=>Console.WriteLine(s));
+            MethodWithCallback(1, 2, s => Console.WriteLine(s));
+
+            MethodWithCallback(1, 2, delegate (string message)
+            {
+                Console.WriteLine("Anonymous delegate: " + message);
+            });
         }
     }
 }
