@@ -11,7 +11,11 @@ namespace Learning_Csharp
     /// delegate is defined by the name of the delegate.
     ///</summary>
     class Delegates : Task
-    {
+    {    
+        // Handy shortcut for console writeline
+        Action<string> cw = Console.WriteLine;
+
+
         // declares a delegate that can encapsulate a method that takes a string as an argument and returns void
         public delegate void Del(string message);
 
@@ -22,6 +26,12 @@ namespace Learning_Csharp
         }
 
         public void MethodWithCallback(int param1, int param2, Del callback)
+        {
+            callback("The number is: " + (param1 + param2).ToString());
+        }
+
+        // You can use built-in Action<>() instead of creating custom delegates all over the place
+        public void MethodWithActionCallback(int param1, int param2, Action<string> callback)
         {
             callback("The number is: " + (param1 + param2).ToString());
         }
@@ -54,6 +64,16 @@ namespace Learning_Csharp
             {
                 Console.WriteLine("Anonymous delegate: " + message);
             });
+
+            MethodWithActionCallback(1, 2, (str) => { Console.WriteLine(str); });
+
+            Action<string> writeAction = new Action<string>((str)=>Console.WriteLine(str));
+            Action<string> actionDelegateWrapper = new Action<string>(del2);
+
+            MethodWithActionCallback(1, 2, writeAction);
+            MethodWithActionCallback(1, 2, actionDelegateWrapper);
+
+            cw("Using cw instead of Console.WriteLine()");
         }
     }
 }

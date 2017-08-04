@@ -22,19 +22,22 @@ namespace Learning_Csharp
             tasks.Add(new Formatting());
             tasks.Add(new Delegates());
             tasks.Add(new CovarianceAndContravariance());
+            tasks.Add(new Extensions());
 
             bool retry = true;
-
             do
             {
+                Console.WriteLine("\nChoose a task to execute:");
                 for (int i = 0; i < tasks.Count; i++)
                 {
                     Console.WriteLine($"{i,3}) {tasks[i]}");
                 }
+
                 int choice = int.Parse(Console.ReadLine());
                 tasks[choice].Run();
 
                 Console.WriteLine("\nRetry? (y/n)");
+            
                 retry = Console.ReadLine().ToLower().Equals("y");
             } while (retry);
         }
